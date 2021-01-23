@@ -9,6 +9,12 @@ module.exports = function(app) {
 
     // API POST Requests
         //POST "/api/notes" saves a note to db given data (note)
+        app.post('/api/notes', function(req,res) {
+            let newNote = req.body;
+            console.log(newNote);
+            noteData.push(newNote);
+            res.json(newNote);
+        });
 
     // API DELETE Requests
         //DELETE "api/notes" deletes a note from the db given id (url encoded)
