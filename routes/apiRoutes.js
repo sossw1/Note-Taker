@@ -18,5 +18,13 @@ module.exports = function(app) {
 
     // API DELETE Requests
         //DELETE "api/notes" deletes a note from the db given id (url encoded)
-
+        app.delete('/api/notes/:id', function(req,res) {
+            let chosen = req.params.id;
+            for(let i=0; i<noteData.length; i++) {
+                if(noteData[i].title === chosen) {
+                    noteData.splice(i,1);
+                }
+            }
+            res.json(noteData);
+        });
 }
