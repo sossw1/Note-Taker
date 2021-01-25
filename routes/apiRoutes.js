@@ -1,5 +1,7 @@
 let noteData = require('../db/db.json');
 
+let counter = noteData.length;
+
 module.exports = function(app) {
     // API GET Requests
         //GET "/api/notes" gets all notes from db
@@ -11,6 +13,8 @@ module.exports = function(app) {
         //POST "/api/notes" saves a note to db given data (note)
         app.post('/api/notes', function(req,res) {
             let newNote = req.body;
+            newNote.id = "" + counter;
+            counter++;
             console.log(newNote);
             noteData.push(newNote);
             res.json(newNote);
@@ -21,7 +25,8 @@ module.exports = function(app) {
         app.delete('/api/notes/:id', function(req,res) {
             let chosen = req.params.id;
             for(let i=0; i<noteData.length; i++) {
-                if(noteData[i].title === chosen) {
+                if(noteData[i].id === chosen) {
+                    
                     noteData.splice(i,1);
                 }
             }
